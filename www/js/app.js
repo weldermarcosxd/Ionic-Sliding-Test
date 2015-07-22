@@ -49,6 +49,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  .state('tab.historico', {
+    url: '/dash/cadReserva',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/cadReserva.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
