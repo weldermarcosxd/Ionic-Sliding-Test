@@ -1,2 +1,1 @@
-# IonicSlidingTabs
- A hacky solution for sliding tabs in Ionic
+Sources to the CCT still on the road
