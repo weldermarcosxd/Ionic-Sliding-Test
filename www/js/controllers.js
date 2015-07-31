@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('TabCtrl', function($scope, $ionicSlideBoxDelegate, $ionicTabsDelegate) {
-  
+
   $scope.selectedTab = 0;
 
   $scope.selectTabWithIndex = function(index) {
@@ -17,7 +17,7 @@ angular.module('starter.controllers', [])
       case 0:
         $scope.selectTabWithIndex(0);
       break;
-      
+
       case 1:
         $scope.selectTabWithIndex(1);
       break;
@@ -29,6 +29,5 @@ angular.module('starter.controllers', [])
   };
 
 })
-
 
 .controller('DashCtrl', function($scope) {})
