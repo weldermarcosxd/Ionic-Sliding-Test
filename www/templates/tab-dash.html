@@ -3,7 +3,29 @@
         <ion-slide-box id="box" show-pager='false' on-slide-changed="slideChanged(index)">
 
             <ion-slide>
-                First Slide
+                <ion-list>
+                    <ion-item class="item-text-wrap">
+                        Reservas Ativas
+                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
+                            Livro Atualmente Reservado
+                        </ion-item>
+                    </ion-item>
+                </ion-list>
+                <ion-list>
+                    <ion-item class="item-thumbnail-left item-icon-right item-text-wrap" href="#/tab/list/{{item.shortname}}">
+                        Histórico de Reservas
+                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
+                            Ultima Reserva
+                        </ion-item>
+                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
+                            Penultima Reserva
+                        </ion-item>
+                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
+                            Ant-Penultima Reserva
+                        </ion-item>
+                    </ion-item>
+                </ion-list>
+
             </ion-slide>
 
             <ion-slide>

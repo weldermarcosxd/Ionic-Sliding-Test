@@ -49,6 +49,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+
+  //Cadastro das reservas
+  .state('tab.cadReserva', {
+    url: '/dash/cadReserva',
+    views: {
+      'tab-reserva': {
+        templateUrl: 'templates/cadReserva.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
