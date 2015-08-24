@@ -2,7 +2,7 @@
 
   require_once "connect.php";
 
-  $sql = "delete from reservation where userid =  1";
+  $sql = "delete from reservation where userid =  3 and record_serial < 5";
 
   $result = pg_query($connection, $sql);
 

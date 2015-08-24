@@ -10,8 +10,6 @@
 
   if($connection){
 
-      echo "Connected";
-
   }else{
 
       echo "Not connected";

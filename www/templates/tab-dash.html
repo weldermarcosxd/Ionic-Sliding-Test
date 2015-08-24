@@ -1,39 +1,73 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title="BiblioApp">
     <ion-content has-header="true" class="has-tabs-top">
         <ion-slide-box id="box" show-pager='false' on-slide-changed="slideChanged(index)">
 
-            <ion-slide>
-                <ion-list>
-                    <ion-item class="item-text-wrap">
-                        Reservas Ativas
-                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
-                            Livro Atualmente Reservado
-                        </ion-item>
-                    </ion-item>
-                </ion-list>
-                <ion-list>
-                    <ion-item class="item-thumbnail-left item-icon-right item-text-wrap" href="#/tab/list/{{item.shortname}}">
-                        Histórico de Reservas
-                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
-                            Ultima Reserva
-                        </ion-item>
-                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
-                            Penultima Reserva
-                        </ion-item>
-                        <ion-item href="#/tab/list/{{item.shortname}}></ion-item">
-                            Ant-Penultima Reserva
-                        </ion-item>
-                    </ion-item>
-                </ion-list>
 
+            <!--Primeiro Slide = Reservas -->
+            <ion-slide>
+
+                <button class="button button-block button-positive" ng-click="openModal()">
+                    Cadastrar
+                </button>
+                <ion-list>
+					
+                    <div class="card">
+                      <div class="item item-divider">Reservas</div>
+						  <ion-item class="item-button-right" ng-repeat="item in data" item="item"
+							href="#/item/{{item.titulo}}">{{ item.titulo }}
+							<h2>{{item.leitor}}</h2>
+						  </ion-item>
+                      </div>
+                  </ion-list>
             </ion-slide>
 
+
+            <!--Segundo Slide = Destaques -->
             <ion-slide>
-                Second Slide
+                  <!-- Campo de Busca -->
+                  <div class="list list-inset">
+                      <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="Search">
+                      </label>
+                  </div>
+
+                  <!-- Lista de Destaques -->
+                  <ion-list>
+                    <div class="card">
+                      <div class="item item-divider">Destaques</div>
+                      <ion-item class="item-button-right" ng-repeat="des in des" item="des"
+                        href="#/item/{{des.nama}}">{{ des.titulo }}
+                        <h2>{{des.autor}}</h2>
+                      </ion-item>
+                    </div>
+                 </ion-list>
             </ion-slide>
 
+
+            <!--Terceiro Slide = Historico -->
             <ion-slide>
-                Third Slide
+               <!-- Campo de Busca -->
+               <div class="list list-inset">
+                  <label class="item item-input">
+                     <i class="icon ion-search placeholder-icon"></i>
+                     <input type="text" placeholder="Search">
+                  </label>
+               </div>
+
+               <!--Lista de livros ja locados -->
+               <ion-list>
+                    <div class="card">
+                      <div class="item item-divider">Historicos<span class="item-note">${{his.autor}}</span></div>
+                      <ion-item class="item-button-right" ng-repeat="his in foodlist" item="item"
+                        href="#/item/{{his.nama}}">{{ his.title }}
+                        <div class="buttons">
+                          <button class="button icon"> {{ his.date }} </button>
+                          <button class="button button-assertive icon ion-android-delete" ng-click="onItemDelete(item)"></button>
+                        </div>
+                      </ion-item>
+                  </div>
+               </ion-list>
             </ion-slide>
 
         </ion-slide-box>
