@@ -1,0 +1,76 @@
+<ion-view view-title="BiblioApp">
+    <ion-content has-header="true" class="has-tabs-top">
+        <ion-slide-box id="box" show-pager='false' on-slide-changed="slideChanged(index)">
+
+
+            <!--Primeiro Slide = Reservas -->
+            <ion-slide>
+
+                <button class="button button-block button-positive" ng-click="openModal()">
+                    Cadastrar
+                </button>
+                <ion-list>
+					
+                    <div class="card">
+                      <div class="item item-divider">Reservas</div>
+						  <ion-item class="item-button-right item-text-wrap" ng-repeat="item in data" item="item"
+							href="#/item/{{item.titulo}}">{{ item.titulo }}
+							<h2>{{item.leitor}}</h2>
+							  <p>Reserva: {{item.reservado | limitTo: 10}}</p>
+							  <p>Expira: {{item.expira | limitTo: 10}}</p>
+						  </ion-item>
+                      </div>
+                  </ion-list><!-- -->
+            </ion-slide>
+
+
+            <!--Segundo Slide = Destaques -->
+            <ion-slide>
+                  <!-- Campo de Busca -->
+                  <div class="list list-inset">
+                      <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" ng-model="query" placeholder="Search">
+                      </label>
+                  </div>
+
+                  <!-- Lista de Destaques -->
+                  <ion-list>
+                    <div class="card">
+                      <div class="item item-divider">Destaques</div>
+                      <ion-item class="item-button-right" ng-repeat="des in des | filter: query" item="des"
+                        href="#/item/{{des.titulo}}">{{ des.titulo }}
+                        <h2>{{des.autor}}</h2>
+                      </ion-item>
+                    </div>
+                 </ion-list>
+            </ion-slide>
+
+
+            <!--Terceiro Slide = Historico -->
+            <ion-slide>
+               <!-- Campo de Busca -->
+               <div class="list list-inset">
+                  <label class="item item-input">
+                     <i class="icon ion-search placeholder-icon"></i>
+                     <input type="search" ng-model="query" placeholder="Search">
+                  </label>
+               </div>
+
+               <!--Lista de livros ja locados -->
+               <ion-list>
+                    <div class="card">
+                      <div class="item item-divider">Historico<span class="item-note"></span></div>
+                      <ion-item class="item-button-right" ng-repeat="his in his | filter: query track by $index" item="item"
+                        href="#/item/{{his.titulo}}">{{ his.titulo }}
+												<h2>Autor: {{his.autor}}</h2>
+												<h3>Emprestado: {{his.emprestimo}}</h3><h3>Devolvido: {{his.devolvido}}</h3>
+                      </ion-item>
+                  </div>
+               </ion-list>
+            </ion-slide>
+
+        </ion-slide-box>
+
+    </ion-content>
+</ion-view>

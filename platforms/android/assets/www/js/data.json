@@ -1,0 +1,48 @@
+  [
+    {
+      "titulo": "A Vida Secreta de Laszlo , Conde Drácula",
+      "autor": "Anscombe, Roderick",
+      "categoria": "Suspense",
+      "tipo": "Livro"
+    },{
+      "nome": "O Alcorao",
+      "autor": "Maome",
+      "categoria": "Livro Sagrado",
+      "tipo": "Obra de Referencia"
+    },{
+      "nome": "Deadpool",
+      "autor": "Marvel",
+      "categoria": "Aventura",
+      "tipo": "Historia em Quadrinhos"
+    },{
+      "nome": "Oracle Database 11g SQL ",
+      "autor": "Jason Price",
+      "categoria": "Bancos de Dados"
+      "tipo": "Livro"
+    },{
+      "nome": "NoSQL Essencial ",
+      "autor": "Novatec",
+      "categoria": "Bancos de Dados",
+      "tipo": "Livro"
+    },{
+      "nome": "Introdução à Robótica ",
+      "autor": "Maja J. Mataric",
+      "categoria": "Inteligencia Artificial",
+      "tipo": "Livro"
+    },{
+      "nome": "Inteligencia Artificial ",
+      "autor": "Stuat Russell",
+      "categoria": "Inteligencia Artificial",
+      "tipo": "Livro"
+    },{
+      "nome": "Gerência de Projetos",
+      "autor": "Kim Heldman",
+      "categoria": "Gerencia de Projetos",
+      "tipo": "Livro"
+    },{
+      "nome": "Um Guia do Conhecimento em Gerenciamento de Projetos (PMBOK)",
+      "autor": "Project Management Institute (PMI) ",
+      "categoria": "Gerencia de Projetos,
+      "tipo": "Livro"
+    }
+  ]

@@ -18,7 +18,7 @@
 							<h2>{{item.leitor}}</h2>
 						  </ion-item>
                       </div>
-                  </ion-list>
+                  </ion-list><!-- -->
             </ion-slide>
 
 
@@ -28,7 +28,7 @@
                   <div class="list list-inset">
                       <label class="item item-input">
                         <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Search">
+                        <input type="text" ng-model="query" placeholder="Search">
                       </label>
                   </div>
 
@@ -36,8 +36,8 @@
                   <ion-list>
                     <div class="card">
                       <div class="item item-divider">Destaques</div>
-                      <ion-item class="item-button-right" ng-repeat="des in des" item="des"
-                        href="#/item/{{des.nama}}">{{ des.titulo }}
+                      <ion-item class="item-button-right" ng-repeat="des in des | filter: query" item="des"
+                        href="#/item/{{des.titulo}}">{{ des.titulo }}
                         <h2>{{des.autor}}</h2>
                       </ion-item>
                     </div>
@@ -51,20 +51,18 @@
                <div class="list list-inset">
                   <label class="item item-input">
                      <i class="icon ion-search placeholder-icon"></i>
-                     <input type="text" placeholder="Search">
+                     <input type="search" ng-model="query" placeholder="Search">
                   </label>
                </div>
 
                <!--Lista de livros ja locados -->
                <ion-list>
                     <div class="card">
-                      <div class="item item-divider">Historicos<span class="item-note">${{his.autor}}</span></div>
-                      <ion-item class="item-button-right" ng-repeat="his in foodlist" item="item"
-                        href="#/item/{{his.nama}}">{{ his.title }}
-                        <div class="buttons">
-                          <button class="button icon"> {{ his.date }} </button>
-                          <button class="button button-assertive icon ion-android-delete" ng-click="onItemDelete(item)"></button>
-                        </div>
+                      <div class="item item-divider">Historico<span class="item-note"></span></div>
+                      <ion-item class="item-button-right" ng-repeat="his in his | filter: query" item="item"
+                        href="#/item/{{his.titulo}}">{{ his.titulo }}
+												<h2>Autor: {{his.autor}}</h2>
+												<h3>Emprestado: {{his.emprestimo}}</h3><h3>Devolvido: {{his.devolvido}}</h3>
                       </ion-item>
                   </div>
                </ion-list>

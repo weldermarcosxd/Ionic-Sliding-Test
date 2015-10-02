@@ -1,26 +1,44 @@
 <?php
 	
-  //header("Content-type: application/json");
-  header("Access-Control-Allow-Headers: accept, content-type
-Access-Control-Allow-Methods: POST
-Access-Control-Allow-Origin: *");
-	
+	header('Access-Control-Allow-Origin: *'); 
+	header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS'); 
+	header('Access-Control-Allow-Headers: X-Requested-With, content-type, X-Token, x-token');
+
 	require_once "connect.php";
 
-  $sql = "insert into reservation (record_serial, userid, created, expires) values (1, 1, '1999-01-08', '1999-01-09')";
+	$reserva = json_decode(file_get_contents("php://input"));
+	$userId = ($reserva->userRegistro);
+	$record_serial = ($reserva->labelRegistro);
+	$today = date ("Y-m-d H:i:s");
 
-  $result = pg_query($connection, $sql);
+	$ativaQuery = "SELECT 1 FROM reservation WHERE userid ='$userId' AND record_expires < '$today' LIMIT 1";
 
-  if(!$result){
+	if (pg_num_rows(pg_query($connection,$ativoQuery))!= 1) {
+		
+		$suspensoQuery = "SELECT 1 FROM reservation WHERE userid ='$userId' AND record_serial='$record_serial' LIMIT 1";	
 
-    echo pg_last_error($connection);
+		if (pg_num_rows(pg_query($connection,$suspensoQuery))!= 1) {
 
-  }else {
-    echo "Sucessufully Inserted";
-  }
+			$sqlInsert = "insert into reservation (record_serial, userid, created, expires) values ('$userId', '$record_serial', current_timestamp, current_timestamp + interval '24 hours')";
 
-  //Close connection
-  pg_close($connection);
+			$result = pg_query($connection, $sqlInsert);
+
+			if(!$result){
+
+				echo pg_last_error($connection);
+
+			}else {
+				print "Reservado com sucesso.";
+			}
+		}else{
+			print "Você já reservou este livro esta semana, aguarde até a próxima.";
+		}
+	}else{
+		print "Você ainda tem reservas ativas";
+	}
 
 
+
+	//Close connection
+  	pg_close($connection);
 ?>
