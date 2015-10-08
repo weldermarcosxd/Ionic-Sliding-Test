@@ -11,9 +11,9 @@
 	$record_serial = ($reserva->labelRegistro);
 	$today = date ("Y-m-d H:i:s");
 
-	$ativaQuery = "SELECT 1 FROM reservation WHERE userid ='$userId' AND record_expires < '$today' LIMIT 1";
+	$ativaQuery = "SELECT 1 FROM reservation WHERE userid ='$userId' AND expires > NOW() LIMIT 1";
 
-	if (pg_num_rows(pg_query($connection,$ativoQuery))!= 1) {
+	if (pg_num_rows(pg_query($connection,$ativaQuery))!= 1) {
 		
 		$suspensoQuery = "SELECT 1 FROM reservation WHERE userid ='$userId' AND record_serial='$record_serial' LIMIT 1";	
 

@@ -61,6 +61,7 @@ angular.module('starter.controllers', [])
 				}else{
 					alert("Você ainda tem reservas ativas");
 				}
+				$scope.modal.hide();
 			});
 		}
 	
