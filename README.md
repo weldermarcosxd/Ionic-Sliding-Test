@@ -1,16 +1,10 @@
-sda
+Hello There,
 
-dasda
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-# On branch master
-# Your branch is up-to-date with 'origin/master'.
-#
-# Changes to be committed:
-#	modified:   www/js/controllers.js
-#	new file:   www/model/connect.php
-#	new file:   www/model/db.php
-#
-# Changes not staged for commit:
-#	modified:   README.md
-#
+This aplication is in development.
+
+This one have the pourpose the get the interaction of readers and library easier by adding the option for the readers to check the library's database from theis smarthphones.
+
+This project is in under GPL licence, so feel free to change, share and use it.
+
+Best Regards,
+weldermarcosxd@gmail.com
