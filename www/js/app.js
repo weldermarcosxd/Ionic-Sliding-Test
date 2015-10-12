@@ -11,6 +11,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 })
 
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.backButton.previousTitleText(false);
+	$ionicConfigProvider.backButton.text('');
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -20,20 +25,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: "/tab",
     abstract: true,
     templateUrl: "templates/tabs.html",
     controller: 'TabCtrl'
   })
-	
-	.state('login', {
+  
+  //Tela de Login
+  .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'loginController'
   })
 	
-	// Each tab has its own nav history stack:
+  // Each tab has its own nav history stack:
   .state('tab.dash', {
     url: '/dash',
     views: {
@@ -42,6 +48,20 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'listController'
       }
     }
+  })
+  
+  //Super Leitores
+  .state('super', {
+    url: '/super',
+    templateUrl: 'templates/super.html',
+    controller: 'listController'
+  })
+  
+  //Pagina Sobre do App
+  .state('sobre', {
+    url: '/sobre',
+    templateUrl: 'templates/sobre.html',
+    controller: 'listController'
   })
 
   //Cadastro das reservas
@@ -57,4 +77,4 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 
-});
+}); 

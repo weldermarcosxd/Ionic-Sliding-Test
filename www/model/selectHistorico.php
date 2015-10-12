@@ -1,8 +1,9 @@
 <?php
 
   require_once "connect.php";
-
-	$user = 2;
+	
+	$user = json_decode(file_get_contents("php://input"));
+	//$user = 2;
 
   $sql = "select u.username as Nome, l.title as titulo, l.author as autor, h.lending_date as emprestimo, h.return_date as devolvido
 					from lending_history h, users u, cataloging_holdings c,labels l
