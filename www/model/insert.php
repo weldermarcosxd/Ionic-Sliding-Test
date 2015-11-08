@@ -8,8 +8,7 @@
 
 	$reserva = json_decode(file_get_contents("php://input"));
 	$userId = ($reserva->userRegistro);
-	$record_serial = ($reserva->labelRegistro);
-	$today = date ("Y-m-d H:i:s");
+	$record_serial = ($reserva->labelregistro);
 
 	$ativaQuery = "SELECT 1 FROM reservation WHERE userid ='$userId' AND expires > NOW() LIMIT 1";
 

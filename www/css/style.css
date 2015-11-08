@@ -2,3 +2,15 @@
 .slider { min-height: 100%; }
 .scroll { min-height: 100% }
 .slider-slide { min-height:100%; }
+
+.loginImg {
+    background: url(/img/logo.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 80%;
+    height: 246px;
+    margin: auto;
+    z-index: 2;
+    position: relative;
+}

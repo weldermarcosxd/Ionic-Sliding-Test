@@ -5,17 +5,29 @@
 	</ion-header-bar>
 	<ion-content has-header="true">
 		<div class="padding">
-			<div class="list">
-				<label class="item item-input">
-					<span class="input-label">Livro</span>
-					<input ng-model="reserva.labelRegistro" type="text" name="livro" />
-				</label>
-				<label class="item item-input">
-					<span class="input-label">Usuario</span>
-					<input ng-model="reserva.userRegistro" type="text" name="user" />
-				</label>
-				<button class="button button-block button-positive" ng-click="insertReserva(reserva)">Reservar</button>
-			</div>
+
+				<div class="list list-inset">
+                      <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" ng-model="query" placeholder="Pesquisar">
+                      </label>
+                  </div>
+				<ion-list>
+                    <div class="card">
+                      <div class="item item-divider">Livros</div>
+                      <ion-item class="item-button-right" ng-repeat="livros in livro | filter: query" item="livro" ng-click="insertReserva(livros)">
+						{{ livros.titulo }}
+                        <h2>{{livros.autor}}</h2>
+						<h3>{{livros.labelregistro}}</h3>
+						  <span  ng-if="livros.disponibilidade == 0" >
+  								Indisponível
+						  </span>
+						  <span  ng-if="livros.disponibilidade == 1" >
+  								Disponível
+						  </span>
+                      </ion-item>
+                    </div>
+                 </ion-list>				
 		</div>
 	</ion-content>
 </div>

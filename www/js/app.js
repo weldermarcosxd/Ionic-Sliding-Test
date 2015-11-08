@@ -50,6 +50,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
   
+   //Detalhes
+  .state('livro', {
+    url: '/livro/:id',
+	templateUrl: 'templates/livro.html',
+	controller: 'listController'
+  })
+  
   //Super Leitores
   .state('super', {
     url: '/super',

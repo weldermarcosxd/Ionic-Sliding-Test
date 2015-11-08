@@ -8,18 +8,18 @@
         <ion-slide-box id="box" show-pager='false' on-slide-changed="slideChanged(index)">
 
 
-            <!--Primeiro Slide = Reservas -->
+            <!--Primeiro Slide de Reservas -->
             <ion-slide>
 
                 <button class="button button-block button-positive" ng-click="openModal()">
-                    Cadastrar
+                    Cadastrar Reserva
                 </button>
                 <ion-list>
 					
                     <div class="card">
                       <div class="item item-divider">Reservas</div>
 						  <ion-item class="item-button-right" ng-repeat="item in data" item="item"
-							href="#/item/{{item.titulo}}">{{ item.titulo }}
+							href="#/item/{{item.titulo}}">{{ item.titulo | limitTo: 100}}
 							<h2>{{item.leitor}}</h2>
 						  </ion-item>
                       </div>
@@ -41,8 +41,8 @@
                   <ion-list>
                     <div class="card">
                       <div class="item item-divider">Destaques</div>
-                      <ion-item class="item-button-right" ng-repeat="des in des | filter: query" item="des"
-                        href="#/item/{{des.titulo}}">{{ des.titulo }}
+                      <ion-item class="item-button-right" ng-repeat="des in des | filter: query" item="des">
+						  {{ des.titulo | limitTo: 100}}
                         <h2>{{des.autor}}</h2>
                       </ion-item>
                     </div>
@@ -64,10 +64,9 @@
                <ion-list>
                     <div class="card">
                       <div class="item item-divider">Historico<span class="item-note"></span></div>
-                      <ion-item class="item-button-right" ng-repeat="his in his | filter: query" item="item"
-                        href="#/item/{{his.titulo}}">{{ his.titulo }}
-												<h2>Autor: {{his.autor}}</h2>
-												<h3>Emprestado: {{his.emprestimo}}</h3><h3>Devolvido: {{his.devolvido}}</h3>
+                      <ion-item class="item-button-right" ng-repeat="his in his | filter: query" item="item" ng-click="onSelectLivro(his)">
+						  	{{ his.titulo}}
+							<h2>Autor: {{his.autor}}</h2>
                       </ion-item>
                   </div>
                </ion-list>
