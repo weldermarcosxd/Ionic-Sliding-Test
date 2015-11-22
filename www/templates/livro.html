@@ -1,16 +1,19 @@
-<ion-view view-title="Livro" hide-back-button="false">
+<ion-view view-title="Livro" >
 	<ion-content class="has-subheader">
 		<ion-list>
-			  <div class="card">
-				  <ion-item class="item-button-right" ng-repeat="item in his | filter: { livro: whichbook } : true" item="item">
-					<h1>Titulo: {{ item.titulo }}</h1>
-					<h2>Autor: {{item.autor}}</h2>
-				    <h3>Emprestado: {{item.emprestimo}}</h3><h3>Devolvido: {{item.devolvido}}</h3>
-				    <ion-item ng-repeat="items in rate | filter: { livro: whichbook } " item="item" >
-					  <h4>Avaliação: {{items.estrelas}}</h4>
-				    </ion-item>
-				  </ion-item>
-			  </div>
-		 </ion-list>
+			<div class="card">
+				<ion-item ng-repeat="item in his | filter: { livro: whichbook } : true" item="item">
+					<h1 >{{ item.titulo }}</h1>
+					<h2 >Autor: {{item.autor}}</h2>
+					<h3>Emprestado: {{item.emprestimo}}</h3><h3>Devolvido: {{item.devolvido}}</h3>
+					<ion-item ng-repeat="items in rate | filter: { livro: whichbook } " item="item" >
+						<h2>Sua {{items.estrelas}}</h2>
+					</ion-item>
+				</ion-item>
+				<button class="button button-block button-positive" ng-click="openModal(2)">
+					Avaliar
+				</button>
+			</div>
+		</ion-list>
 	</ion-content>
 </ion-view>

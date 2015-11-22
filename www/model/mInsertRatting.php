@@ -5,11 +5,21 @@
 	$ratting = json_decode(file_get_contents("php://input"));
 
 	$user = ($ratting->user);
-	$estrelas = ($ratting->estrelas);
+	$estrelas = ($ratting->nota);
 	$livro = ($ratting->livro);
+	$comment = ($ratting->comentario);
+
+	$user = 1;
+	$estrelas = 4;
+	$livro = 1;
+	$comment = "Isto não foi um teste";
 
 	$col = $db->ratting;
-	$col->insert(array("user" => $user,"estrelas" => $estrelas, "livro" => $livro));
+	$col->update(
+		array("livro" => $livro, "user" => $user),
+		array("estrelas" => $estrelas,"livro" => $livro, "user" => $user), 
+		array("upsert" => true)
+	);
 
 	$col = $db->livroRatting;
 	$row = $col->findOne(array("livro" => $livro));
@@ -20,11 +30,16 @@
 		$media = ($row["estrelas"] + $estrelas) / 2 ;
 	}
 
-	echo $media;	
-
 	$col->update(
 		array("livro" => $livro),
 		array("estrelas" => $media,"livro" => $livro ), 
+		array("upsert" => true)
+	);
+
+	$col = $db->comments;
+	$col->update(
+		array("livro" => $livro, "user" => $user),
+		array("comment" => $comment,"livro" => $livro, "user" => $user), 
 		array("upsert" => true)
 	);
 

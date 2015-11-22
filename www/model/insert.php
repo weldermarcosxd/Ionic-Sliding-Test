@@ -7,8 +7,8 @@
 	require_once "connect.php";
 
 	$reserva = json_decode(file_get_contents("php://input"));
-	$userId = ($reserva->userRegistro);
-	$record_serial = ($reserva->labelregistro);
+	$userId = ($reserva->labelregistro);
+	$record_serial = ($reserva->userRegistro);
 
 	$ativaQuery = "SELECT 1 FROM reservation WHERE userid ='$userId' AND expires > NOW() LIMIT 1";
 

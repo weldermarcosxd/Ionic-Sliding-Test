@@ -5,7 +5,7 @@
 
   require_once "connect.php";
 
-  $sql = "select u.userName as Leitor, r.created as Reservado, r.expires as Expira , l.title as Titulo
+  $sql = "select u.userName as Leitor, u.userid as userid, r.created as Reservado, r.expires as Expira , l.title as Titulo
           from reservation r, users u, labels l
           where r.userId = u.userId and l.holding_serial = r.record_serial" ;
 

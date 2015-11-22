@@ -1,15 +1,17 @@
 <?php
 
   require_once "connect.php";
+  
+  $user = json_decode(file_get_contents("php://input")); 
 
-  $sql = "delete from reservation where userid =  3 and record_serial < 5";
+  $sql = "delete from reservation where userid =  '$user' and expires > 'time()'";
 
   $result = pg_query($connection, $sql);
 
   if(!$result){
     echo "Algo de errado não está certo";
   }else{
-    echo "Deletado com sucesso";
+    print "success";
   }
 
   pg_close($connection);

@@ -6,7 +6,7 @@
   require_once "connect.php";
 
   $sql = "select l.holding_serial as registro, c.asset_holding as Autor, c.record as Titulo
-  		  from lending l, cataloging_holdings c
+  		  from lending_history l, cataloging_holdings c
 		  where l.holding_serial = c.holding_serial
 		  group by l.holding_serial,c.record, c.asset_holding
 		  order by l.holding_serial, c.asset_holding" ;

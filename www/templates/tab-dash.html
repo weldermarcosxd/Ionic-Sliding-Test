@@ -5,25 +5,30 @@
         </button>
 	</ion-nav-buttons>
     <ion-content has-header="true" class="has-tabs-top">
+		
+		<ion-refresher
+					pulling-text="Solte para atualizar..."
+					on-refresh="doRefresh()">
+				</ion-refresher>
+		
         <ion-slide-box id="box" show-pager='false' on-slide-changed="slideChanged(index)">
 
 
             <!--Primeiro Slide de Reservas -->
             <ion-slide>
-
-                <button class="button button-block button-positive" ng-click="openModal()">
+				
+                <button class="button button-block button-positive" ng-click="openModal(1)">
                     Cadastrar Reserva
                 </button>
                 <ion-list>
-					
                     <div class="card">
                       <div class="item item-divider">Reservas</div>
-						  <ion-item class="item-button-right" ng-repeat="item in data" item="item"
-							href="#/item/{{item.titulo}}">{{ item.titulo | limitTo: 100}}
+						  <ion-item class="item-button-right" ng-repeat="item in data" item="item">
+							{{ item.titulo | limitTo: 100}}
 							<h2>{{item.leitor}}</h2>
 						  </ion-item>
                       </div>
-                  </ion-list><!-- -->
+                  </ion-list>
             </ion-slide>
 
 
@@ -44,6 +49,9 @@
                       <ion-item class="item-button-right" ng-repeat="des in des | filter: query" item="des">
 						  {{ des.titulo | limitTo: 100}}
                         <h2>{{des.autor}}</h2>
+						  <h2 ng-show="livroRate.livro == des.registro">
+						 Avaliação Geral:{{livroRate.estrelas}}
+						  </h2>
                       </ion-item>
                     </div>
                  </ion-list>

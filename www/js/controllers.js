@@ -52,7 +52,10 @@ angular.module('starter.controllers', [])
 //Controlador das listas do menu principal
 .controller('listController', function($scope, $http, $ionicModal, $state, $ionicPopover, $location, $stateParams) {
 	
-	$scope.whichbook=$state.params.id;
+	$scope.whichartist=$state.params.id;
+	
+	$scope.avaliacao = {};
+	$scope.avaliacao.nota = 3;
 	
 	//Definicao da funcao de insercao de reserva
 	$scope.insertReserva = function(reserva){
@@ -76,9 +79,18 @@ angular.module('starter.controllers', [])
 			
 			$scope.modal.hide();
 		});
+		
+		$scope.doRefresh = function() {
+			$http.get("http://localhost/slides/www/model/selectReservas.php").success(function(data){$scope.data = data
+			})
+			.finally(function() {
+			// Stop the ion-refresher from spinning
+			$scope.$broadcast('scroll.refreshComplete');
+			});
+		};
 	}
 	
-	$scope.whichartist=$state.params.id;
+	$scope.whichbook=$state.params.id;
 	
 	//Busca as resrvas ativas na tabela reservation e o nome do usuario que realizou a mesma
   	$http.get("http://localhost/slides/www/model/selectReservas.php").success(function(data){$scope.data = data});
@@ -99,27 +111,41 @@ angular.module('starter.controllers', [])
 	//seleciona as avaliações ja realizadas
 	$http.post("http://localhost/slides/www/model/mSelectRatting.php", $scope.his).success(function(rate){$scope.rate = rate});
 	
+	//seleciona as avaliações ja realizadas
+	$http.get("http://localhost/slides/www/model/mSelectLivroRatting.php").success(function(livroRate){$scope.livroRate = livroRate});
+	
+	
+	
 	//Controlador da janela modal de insercao de reserva
 	$ionicModal.fromTemplateUrl("templates/cadReserva.html",{
-		animation: "slideUp",
+		animation: "slide-in-Up",
 		scope : $scope
 	}).then(function(modalr){
 		$scope.modalr = modalr;
 	});
 	
-	$scope.openModal = function(){
-		$scope.modalr.show();
-	}
+	//Controlador da janela modal de avaliação
+	$ionicModal.fromTemplateUrl("templates/avaliacao.html",{
+		animation: "slideUp",
+		scope : $scope
+	}).then(function(modalrAval){
+		$scope.modalrAval = modalrAval;
+	});
+	
+	$scope.openModal = function(index) {
+      if (index == 1) $scope.modalr.show();
+      else $scope.modalrAval.show();
+    };
+
+    $scope.closeModal = function(index) {
+      if (index == 1) $scope.modalr.hide();
+      else $scope.modalrAval.hide();
+    };
 
 	//link dos detalhes
 	$scope.onSelectLivro = function(his) {
         $location.path('livro/' + his.livro);
-		//seleciona a classificação do livro pelo usuário
-		//$http.post("http://localhost/slides/www/model/mSelectRatting.php", his).success(function(rate){$scope.rate = rate});
-		alert(JSON.stringify($scope.rate));
     }
-	
-	
 	
 	//Controladores do menu popup
 	$ionicPopover.fromTemplateUrl('templates/popover.html', {
@@ -127,9 +153,6 @@ angular.module('starter.controllers', [])
   		}).then(function(popover) {
 		$scope.popover = popover;
   	});
-	
-	
-	
 	
 	//Logout
 	$scope.logout = function(){
@@ -149,5 +172,20 @@ angular.module('starter.controllers', [])
 		$location.path("/super");
 		$scope.popover.hide();
 	}
+	
+	$scope.delete = function(user){
+		if(user == JSON.stringify(JSON.parse(window.localStorage['user'] || '{}'))){
+			$http.post("http://localhost/slides/www/model/delete.php", user).success(function(res){$scope.res = res});
+			if($scope.res == "success"){
+				alert("deu");
+			}   
+		}
+	}
+		
+	//	link dos detalhes
+	$scope.avaliar = function(avaliacao) {
+		$http.post("http://localhost/slides/www/model/mInsertRatting.php",avaliacao).success(function(avaliado){$scope.data = rate});
+		alert(JSON.stringify($scope.data));
+    }
 	
 });
