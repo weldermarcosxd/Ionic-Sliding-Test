@@ -1,19 +1,25 @@
 <ion-view view-title="Identificação" hide-back-button="true">
     <ion-content>
-		<div class="loginImg">
-			
-		</div>
-        <form>
+        <form name="loginForm">
             <ion-list>
 				<br />
-                <label class="item item-input"> 
+                <label class="item item-input" ng-class="{ 'has-error' : loginForm.username.$invalid}"> 
                     <span class="input-label">Usuário</span>
-                    <input ng-model="user.name" type="text" required />
+                    <input ng-model="user.name" type="text" required name="usuario" />
                 </label>
+                <div class="errors" ng-show="loginForm.usuario.$error.required">
+                    <p>Nome Completo é obrigatório</p>
+                </div>
                 <label class="item item-input">
                     <span class="input-label">Matrícula</span>
-                    <input ng-model="user.pass" type="password" required />
+                    <input ng-model="user.pass" type="password" required name="pass" />
                 </label>
+                <div class="errors" ng-show="loginForm.pass.$error.required">
+                    <p >Matricula é obrigatória</p>
+                </div>
+                <div class="errors" ng-show="loginSuccess">
+                    <p >Campos informados são inválidos</p>
+                </div>
             </ion-list>
             <button class="button button-positive button-block" ng-click="login(user)">Entrar</button>
             <a class="button button-positive button-clear button-block " href="#/ajuda">Não Consigo Entrar</a>

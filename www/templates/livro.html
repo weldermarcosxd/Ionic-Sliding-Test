@@ -10,7 +10,7 @@
 					<div ng-repeat="items in rate | filter: { livro: whichbook } : true">
 						<h2>Sua Avaliação: {{items.estrelas}}</h2>
 						<div ng-repeat="itens in comentarios | filter:  { livro: whichbook }: true ">
-							<h2>Comentários: {{itens.comment}}</h2>
+							<h2>Seu Comentário: {{itens.comment}}</h2>
 						</div>
 					</div>
 				</ion-item>

@@ -33,17 +33,19 @@ angular.module('starter.controllers', [])
 //Controlador de Login
 .controller('loginController', function($scope, $http, $location) {
   $scope.login = function(user){
-	  
+      
+    $scope.loginSuccess = false;
 	user.registro = localStorage.getItem("user");
 	  
 	var url = "http://localhost/slides/www/model/login.php";
 	
 	$http.post(url,user).then(function(response){
 		if(response.data == "success"){
-			window.localStorage['user'] = user.pass;
+			window.localStorage.user = user.pass;
 			$location.path("/tab/dash");
+            $scope.loginSuccess = false;
 		}else{
-			alert("Insira informações válidas nos campos de Nome e Matrícula.");
+			$scope.loginSuccess = true;
 		}
 	});
   }
@@ -75,21 +77,26 @@ angular.module('starter.controllers', [])
 			}else{
 				alert(response.data);
 			}	
+			
 			$scope.modalr.hide();
+            $scope.doRefresh();
 		});
 		
-		$scope.doRefresh = function() {
-			$http.get("http://localhost/slides/www/model/selectReservas.php").success(function(data){$scope.data = data
+	}
+    
+    $scope.doRefresh = function() {
+			$http.get("http://localhost/slides/www/model/selectReservas.php").success(function(data){$scope.data = data});
+            $http.get("http://localhost/slides/www/model/mSelectRatting.php").success(function(rate){$scope.rate = rate});
+            $http.get("http://localhost/slides/www/model/mSelectComment.php").success(function(comentarios){$scope.comentarios = comentarios
 			})
 			.finally(function() {
 			// Stop the ion-refresher from spinning
 			$scope.$broadcast('scroll.refreshComplete');
 			});
 		};
-	}
 	
 	$scope.whichbook=$state.params.id;
-	
+    
 	//Busca as resrvas ativas na tabela reservation e o nome do usuario que realizou a mesma
   	$http.get("http://localhost/slides/www/model/selectReservas.php").success(function(data){$scope.data = data});
 	
@@ -206,5 +213,6 @@ angular.module('starter.controllers', [])
 		$http.post("http://localhost/slides/www/model/mInsertRatting.php",avaliacao).success(function(avaliado){$scope.avaliado = avaliado});
 		alert($scope.avaliado);
 		$scope.modalrAval.hide();
+        $location.path("/tab/dash");
     }
 });
