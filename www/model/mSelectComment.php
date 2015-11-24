@@ -2,20 +2,18 @@
 	
 	require_once("mConnect.php");
 
-	$livro = json_decode(file_get_contents("php://input"));
-
-	$coment = $livro->comment;
-
 	$col = $db->comments;
-	$rows = $col->find(array("livro" => $coment));
+	$rows = $col->find();
+	
+	$i = 0;
 
   	foreach($rows as $row){
-	
-		echo $row["_id"];
-		echo $row["user"];
-		echo $row["comment"];
-		
+		$arr[$i]["comment"] = $row["comment"];
+		$arr[$i]["livro"] = $row["livro"];
+		$arr[$i]["user"] = $row["user"];
+		$i++;
 	}
 
+	echo json_encode($arr);
 
 ?>

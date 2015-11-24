@@ -55,7 +55,6 @@ angular.module('starter.controllers', [])
 	$scope.whichartist=$state.params.id;
 	
 	$scope.avaliacao = {};
-	$scope.avaliacao.nota = 3;
 	
 	//Definicao da funcao de insercao de reserva
 	$scope.insertReserva = function(reserva){
@@ -76,8 +75,7 @@ angular.module('starter.controllers', [])
 			}else{
 				alert(response.data);
 			}	
-			
-			$scope.modal.hide();
+			$scope.modalr.hide();
 		});
 		
 		$scope.doRefresh = function() {
@@ -102,8 +100,8 @@ angular.module('starter.controllers', [])
   	$http.get("http://localhost/slides/www/model/selectDestaques.php").success(function(des){$scope.des = des});
 	
 	//Busca os livros que foram emprestados e devolvidos por determinado usuário
-	var reg = JSON.stringify(JSON.parse(window.localStorage['user'] || '{}'));
-  	$http.post("http://localhost/slides/www/model/selectHistorico.php", reg).success(function(his){$scope.his = his});	
+	$scope.reg = JSON.stringify(JSON.parse(window.localStorage['user'] || '{}'));
+  	$http.post("http://localhost/slides/www/model/selectHistorico.php", $scope.reg).success(function(his){$scope.his = his});	
 	
 	//seleciona os leitores que mais leram
 	$http.get("http://localhost/slides/www/model/selectSuper.php").success(function(sup){$scope.sup = sup});
@@ -114,6 +112,8 @@ angular.module('starter.controllers', [])
 	//seleciona as avaliações ja realizadas
 	$http.get("http://localhost/slides/www/model/mSelectLivroRatting.php").success(function(livroRate){$scope.livroRate = livroRate});
 	
+	//seleciona todos os comentários
+	$http.get("http://localhost/slides/www/model/mSelectComment.php").success(function(comentarios){$scope.comentarios = comentarios});
 	
 	
 	//Controlador da janela modal de insercao de reserva
@@ -147,6 +147,10 @@ angular.module('starter.controllers', [])
         $location.path('livro/' + his.livro);
     }
 	
+	$scope.onSelectDes = function(des) {
+        $location.path('des/' + des.registro);
+    }
+	
 	//Controladores do menu popup
 	$ionicPopover.fromTemplateUrl('templates/popover.html', {
     	scope: $scope,
@@ -167,25 +171,40 @@ angular.module('starter.controllers', [])
 		$scope.popover.hide();
 	}
 	
+	//Ajuda
+	$scope.ajuda = function(){
+		$location.path("/ajuda");
+		$scope.popover.hide();
+	}
+	
 	//Super
 	$scope.super = function(){
 		$location.path("/super");
 		$scope.popover.hide();
 	}
 	
-	$scope.delete = function(user){
+	$scope.deleteRes = function(user){
+		alert(user);
 		if(user == JSON.stringify(JSON.parse(window.localStorage['user'] || '{}'))){
-			$http.post("http://localhost/slides/www/model/delete.php", user).success(function(res){$scope.res = res});
-			if($scope.res == "success"){
+			$http.post("http://localhost/slides/www/model/delete.php", user).success(function(deletado){$scope.deletado = deletado});
+			if($scope.deletado == "success"){
 				alert("deu");
-			}   
+			} 
+			else{
+				alert("nao deu");
+			}
 		}
+		alert("nao deu não");
+		$scope.doRefresh();
 	}
 		
 	//	link dos detalhes
 	$scope.avaliar = function(avaliacao) {
-		$http.post("http://localhost/slides/www/model/mInsertRatting.php",avaliacao).success(function(avaliado){$scope.data = rate});
-		alert(JSON.stringify($scope.data));
+		avaliacao.user = $scope.reg;
+		avaliacao.livro = $scope.whichbook;
+		alert(JSON.stringify(avaliacao));
+		$http.post("http://localhost/slides/www/model/mInsertRatting.php",avaliacao).success(function(avaliado){$scope.avaliado = avaliado});
+		alert($scope.avaliado);
+		$scope.modalrAval.hide();
     }
-	
 });

@@ -57,6 +57,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 	controller: 'listController'
   })
   
+  .state('des', {
+    url: '/des/:id',
+	templateUrl: 'templates/des.html',
+	controller: 'listController'
+  })
+  
   //Super Leitores
   .state('super', {
     url: '/super',
@@ -68,6 +74,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   .state('sobre', {
     url: '/sobre',
     templateUrl: 'templates/sobre.html',
+    controller: 'listController'
+  })
+  
+  //Pagina Ajuda
+  .state('ajuda', {
+    url: '/ajuda',
+    templateUrl: 'templates/ajuda.html',
     controller: 'listController'
   })
 

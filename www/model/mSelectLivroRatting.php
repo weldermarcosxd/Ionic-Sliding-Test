@@ -8,8 +8,8 @@
 	$i = 0;
 
 	foreach($rows as $row){
-		$arr["estrelas"] = $row["estrelas"];
-		$arr["livro"] = $row["livro"];
+		$arr[$i]["estrelas"] = $row["estrelas"];
+		$arr[$i]["livro"] = $row["livro"];
 		$i++;
 	}
 

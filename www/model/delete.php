@@ -4,7 +4,7 @@
   
   $user = json_decode(file_get_contents("php://input")); 
 
-  $sql = "delete from reservation where userid =  '$user' and expires > 'time()'";
+  $sql = "delete from reservation where userid =  '$user'";
 
   $result = pg_query($connection, $sql);
 

@@ -7,12 +7,7 @@
 	$user = ($ratting->user);
 	$estrelas = ($ratting->nota);
 	$livro = ($ratting->livro);
-	$comment = ($ratting->comentario);
-
-	$user = 1;
-	$estrelas = 4;
-	$livro = 1;
-	$comment = "Isto não foi um teste";
+	$comment = ($ratting->comment);
 
 	$col = $db->ratting;
 	$col->update(
@@ -42,5 +37,7 @@
 		array("comment" => $comment,"livro" => $livro, "user" => $user), 
 		array("upsert" => true)
 	);
+
+	print "success";
 
 ?>

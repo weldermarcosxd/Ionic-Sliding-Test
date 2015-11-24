@@ -1,0 +1,19 @@
+<ion-view view-title="Destaque" hide-back-button="false">
+	<ion-content class="has-subheader">
+		
+		<ion-list>
+			<div class="card">
+				<ion-item class="item-text-wrap" ng-repeat="item in des | filter: { registro: whichbook } : true" item="item">
+					<h2  class="item-text-wrap">{{ item.titulo }}</h2>
+					<h2 >Autor: {{item.autor}}</h2>
+					<div ng-repeat="items in livroRate | filter: { livro: whichbook } : true">
+						<h2> Avaliação geral: {{items.estrelas}}</h2>
+						<div ng-repeat="itens in comentarios | filter:  { livro: whichbook }: true ">
+							<h2>Comentários: {{itens.comment}}</h2>
+						</div>
+					</div>
+				</ion-item>
+			</div>
+		</ion-list>
+	</ion-content>
+</ion-view>

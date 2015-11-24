@@ -9,7 +9,7 @@
 		<ion-refresher
 					pulling-text="Solte para atualizar..."
 					on-refresh="doRefresh()">
-				</ion-refresher>
+		</ion-refresher>
 		
         <ion-slide-box id="box" show-pager='false' on-slide-changed="slideChanged(index)">
 
@@ -20,10 +20,11 @@
                 <button class="button button-block button-positive" ng-click="openModal(1)">
                     Cadastrar Reserva
                 </button>
-                <ion-list>
+                <ion-list show-delete="true">
                     <div class="card">
                       <div class="item item-divider">Reservas</div>
-						  <ion-item class="item-button-right" ng-repeat="item in data" item="item">
+						  <ion-item class="item-button-right item-text-wrap" ng-repeat="item in data" item="item">
+							  	<ion-delete-button class="ion-minus-circled" ng-if="item.userid == reg" ng-click="deleteRes(item.userid)"></ion-delete-button>
 							{{ item.titulo | limitTo: 100}}
 							<h2>{{item.leitor}}</h2>
 						  </ion-item>
@@ -46,12 +47,9 @@
                   <ion-list>
                     <div class="card">
                       <div class="item item-divider">Destaques</div>
-                      <ion-item class="item-button-right" ng-repeat="des in des | filter: query" item="des">
-						  {{ des.titulo | limitTo: 100}}
+                      <ion-item class="item-button-right item-text-wrap" ng-repeat="des in des | filter: query" item="des" ng-click="onSelectDes(des)">
+						  {{ des.titulo}}
                         <h2>{{des.autor}}</h2>
-						  <h2 ng-show="livroRate.livro == des.registro">
-						 Avaliação Geral:{{livroRate.estrelas}}
-						  </h2>
                       </ion-item>
                     </div>
                  </ion-list>
@@ -72,7 +70,7 @@
                <ion-list>
                     <div class="card">
                       <div class="item item-divider">Historico<span class="item-note"></span></div>
-                      <ion-item class="item-button-right" ng-repeat="his in his | filter: query" item="item" ng-click="onSelectLivro(his)">
+                      <ion-item class="item-button-right item-text-wrap" ng-repeat="his in his | filter: query" item="item" ng-click="onSelectLivro(his)">
 						  	{{ his.titulo}}
 							<h2>Autor: {{his.autor}}</h2>
                       </ion-item>

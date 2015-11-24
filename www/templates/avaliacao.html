@@ -4,19 +4,20 @@
 		<button class="button button-clear button-primary" ng-click="closeModal(2)"><b>X</b>&nbsp;</button>
 	</ion-header-bar>
 	<ion-content has-header="true">
-		<div class="list">
+		<form>
 		  <div class="item range range-positive">
 			<i class="icon ion-sad"></i>
-			<input type="range" name="volume" id="avaliacao" min="1" max="5" value={{avaliacao.nota}}>
+			<input type="range" name="volume" id="avaliacao" min="1" max="5" value="nota" ng-model="avaliacao.nota">
 			<i class="icon ion-happy"></i>
 		  </div>
+		  <div class="item range widget uib_w_1 d-margins" data-uib="ionic/range" data-ver="0">
+    		<input type="range" max="100" value="50" step="1">
+		</div>
 		  <label class="item item-input item-stacked-label">
 			<span class="input-label">Comentário</span>
-			<input type="text" value={{avaliacao.comentario}} placeholder="O que achou deste livro?"><br />
+			<input type="text" placeholder="O que achou deste livro?" ng-model="avaliacao.comment"><br />
 		  </label>
-		  <button class="button button-block button-positive" ng-click="closeModal(2); avaliar(avaliacao)">
-             	Avaliar
-          </button>
-		  </div>
+		  <input class="button button-block button-positive" ng-click="avaliar(avaliacao)" type="submit" id="submit" value="Avaliar" />
+		 </form>
 	</ion-content>
 </div>
